@@ -1,4 +1,5 @@
 # _mytermuxsetup_
+Recommended to reinstall the Termux app before using it
 _Run on Termux:_
 ```
 pkg install git -y
