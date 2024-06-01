@@ -68,6 +68,14 @@ pip install --upgrade httpie
 pip install -U requests[socks]
 pip install requests
 pip install ddgr
+# fix
+echo "Fixing"
+termux-chroot
+ls /usr
+# reload settings
+echo "Reloading..."
+termux-reload-settings
+cd $HOME
 # setup fastfetch
 echo "Installing And Settingup FastFetch"
 pkg install fastfetch -y
@@ -80,13 +88,5 @@ clear
 fastfetch -l none
 echo \"\"
 "> .bashrc
-# reload settings
-echo "Reloading..."
-termux-reload-settings
-# fix
-echo "Fixing"
-termux-chroot
-ls /usr
-cd $HOME
 # EXIT
 logout && exit
