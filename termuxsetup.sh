@@ -113,7 +113,6 @@ echo "#!/system/bin/sh
 clear
 printf \"Reloading...\"
 termux-reload-settings
-sleep 1
 clear
 fastfetch -l none
 echo \"\"
