@@ -100,10 +100,7 @@ pip install --upgrade httpie
 # Install ddgr
 pip install ddgr
 
-# fix
-echo "Fixing"
-termux-chroot
-ls /usr
+# Go home
 cd $HOME
 
 # setup fastfetch
@@ -122,5 +119,11 @@ echo \"\"
 echo "Reloading..."
 termux-reload-settings
 
+# fix
+echo "Fixing"
+termux-chroot
+ls /usr
+
 # EXIT
-logout && exit
+exit
+exit
