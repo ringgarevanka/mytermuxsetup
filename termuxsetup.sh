@@ -2,7 +2,7 @@
 #!/system/bin/sh
 
 # Termux Setup By: rvnull00 (ringgarevanka)
-echo "Termux Setup By: rvnull00"
+echo "Termux Setup By: rvnull00 (ringgarevanka)"
 clear
 
 # update
@@ -47,7 +47,6 @@ pkg install git -y
 pkg install zip -y
 pkg install unzip -y
 pkg install openssh -y
-
 # Programming languages and runtimes
 pkg install python -y
 pkg install python2 -y
@@ -57,13 +56,11 @@ pkg install php -y
 pkg install ruby -y
 pkg install golang -y
 pkg install rust -y
-
 # Development and build tools
 pkg install clang -y
 pkg install libffi -y
 pkg install openssl -y
 pkg install fakeroot -y
-
 # System monitoring and management tools
 pkg install htop -y
 pkg install httping -y
@@ -72,7 +69,6 @@ pkg install jq -y
 pkg install libxml2-utils -y
 pkg install grep -y
 pkg install bc -y
-
 # Utilities and productivity tools
 pkg install nano -y
 pkg install zsh -y
@@ -80,12 +76,13 @@ pkg install sqlite -y
 pkg install sshpass -y
 pkg install proot -y
 pkg install android-tools -y
-
 # Additional and entertainment tools
 pkg install figlet -y
 pkg install cowsay -y
 pkg install w3m -y
 pkg install ffmpeg -y
+# Interface
+pkg install fastfetch -y
 clear
 
 # php composer
@@ -97,16 +94,12 @@ clear
 echo "Installing Python additional packages"
 # Upgrade pip and setuptools
 pip install --upgrade pip setuptools
-
 # Install requests
 pip install requests
-
 # Install requests with SOCKS support
 pip install -U requests[socks]
-
 # Install httpie
 pip install --upgrade httpie
-
 # Install ddgr
 pip install ddgr
 clear
@@ -114,18 +107,24 @@ clear
 # Go home
 cd $HOME
 
-# setup fastfetch
-echo "Installing And Settingup Fastfetch"
-pkg install fastfetch -y
-echo "#!/system/bin/sh
+# setup interface
+echo "Settingup Termux Interface"
+# fastfetch
+echo "# Termux Setup By: rvnull00 (ringgarevanka)
 clear
-printf \"Reloading...\"
+printf \"Loading...\"
 termux-reload-settings
 clear
 fastfetch -l none
-echo \"\"
 "> .bashrc
+# extra keys
+echo "# Termux Setup By: rvnull00 (ringgarevanka)
+extra-keys = [[{key: 'F1', popup: 'F7'},{key: 'F2', popup: 'F8'},{key: 'F3', popup: 'F9'},{key: 'F4', popup: 'F10'},{key: 'F5', popup: 'F11'},{key: 'F6', popup: 'F12'},'FN','SHIFT'],[{key: ESC, popup: {macro: 'CTRL d', display: 'EXIT'}},{key: '/', popup: '&&'},{key: '|', popup: '-'},'HOME','UP','END','PGUP',{key: 'BKSP', popup: 'DEL'}],['TAB',{key: 'CTRL', popup: 'PASTE'},'ALT','LEFT','DOWN','RIGHT','PGDN',{key: 'KEYBOARD', popup: 'DRAWER'}]]
+"> .termux/termux.properties
 clear
+
+# remove
+rm -rf mytermuxsetup
 
 # reload settings
 echo "Reloading..."
@@ -133,5 +132,4 @@ termux-reload-settings
 clear
 
 # EXIT
-rm -rf mytermuxsetup
 exit
