@@ -11,6 +11,11 @@ pkg update -y && apt update -y
 pkg upgrade -y && apt upgrade -y
 clear
 
+# setup storage
+echo "Settingup storage"
+termux-setup-storage
+clear
+
 # clean
 echo "Cleaning Packages"
 pkg autoclean && pkg clean
@@ -26,11 +31,6 @@ clear
 echo "Installing Termux additional requirements"
 pkg install termux-exec
 pkg install termux-api
-clear
-
-# setup storage
-echo "Settingup storage"
-termux-setup-storage
 clear
 
 # upgrade repo
@@ -130,12 +130,6 @@ clear
 # reload settings
 echo "Reloading..."
 termux-reload-settings
-clear
-
-# fix
-echo "Fixing"
-termux-chroot
-ls /usr
 clear
 
 # EXIT
