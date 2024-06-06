@@ -6,13 +6,12 @@
 ```
 pkg install git -y
 git clone https://github.com/ringgarevanka/mytermuxsetup.git
-cd mytermuxsetup
-bash termuxsetup.sh
+bash mytermuxsetup/termuxsetup.sh
 rm -rf mytermuxsetup
 ```
 OR
 ```
-pkg install git -y && git clone https://github.com/ringgarevanka/mytermuxsetup.git && cd mytermuxsetup && bash termuxsetup.sh && rm -rf mytermuxsetup
+pkg install git -y && git clone https://github.com/ringgarevanka/mytermuxsetup.git && bash mytermuxsetup/termuxsetup.sh && rm -rf mytermuxsetup
 ```
 Note: To update, run the command above again
 
