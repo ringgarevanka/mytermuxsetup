@@ -1,34 +1,42 @@
 #!/bin/bash
 #!/system/bin/sh
+
 # Termux Setup By: rvnull00 (ringgarevanka)
 echo "Termux Setup By: rvnull00"
+clear
 
 # update
 echo "Updating and Upgrade Packages"
 pkg update -y && apt update -y
 pkg upgrade -y && apt upgrade -y
+clear
 
 # clean
 echo "Cleaning Packages"
 pkg autoclean && pkg clean
+clear
 
 # install repo
 echo "Installing repo"
 pkg install x11-repo
 pkg install root-repo
+clear
 
 # Termux additional requirements
 echo "Installing Termux additional requirements"
 pkg install termux-exec
 pkg install termux-api
+clear
 
 # setup storage
 echo "Settingup storage"
 termux-setup-storage
+clear
 
 # upgrade repo
 echo "Upgrading repo"
 termux-upgrade-repo
+clear
 
 # install
 echo "Installing or Updating additional packages"
@@ -78,10 +86,12 @@ pkg install figlet -y
 pkg install cowsay -y
 pkg install w3m -y
 pkg install ffmpeg -y
+clear
 
 # php composer
 echo "Installing and Setup PHP Composer for PHP"
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/data/data/com.termux/files/usr/bin --filename=composer
+clear
 
 # pip install
 echo "Installing Python additional packages"
@@ -99,6 +109,7 @@ pip install --upgrade httpie
 
 # Install ddgr
 pip install ddgr
+clear
 
 # Go home
 cd $HOME
@@ -114,15 +125,18 @@ clear
 fastfetch -l none
 echo \"\"
 "> .bashrc
+clear
 
 # reload settings
 echo "Reloading..."
 termux-reload-settings
+clear
 
 # fix
 echo "Fixing"
 termux-chroot
 ls /usr
+clear
 
 # EXIT
 exit
