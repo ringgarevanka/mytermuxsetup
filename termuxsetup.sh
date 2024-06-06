@@ -133,5 +133,5 @@ termux-reload-settings
 clear
 
 # EXIT
-exit
+rm -rf mytermuxsetup
 exit
