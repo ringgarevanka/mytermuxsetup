@@ -25,6 +25,7 @@ clear
 echo "Installing repo"
 pkg install x11-repo -y
 pkg install root-repo -y
+pkg install tur-repo -y
 clear
 
 # Termux additional requirements
