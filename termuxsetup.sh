@@ -66,10 +66,6 @@ main() {
     install_packages
     clear
     
-    echo "Upgrading repo"
-    termux-upgrade-repo
-    clear
-    
     setup_php_composer
     clear
     
@@ -86,10 +82,6 @@ main() {
     
     echo "Cleaning Packages"
     pkg autoclean && pkg clean
-    clear
-    
-    echo "Upgrading repo"
-    termux-upgrade-repo
     clear
     
     rm -rf mytermuxsetup
