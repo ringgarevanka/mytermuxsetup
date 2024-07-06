@@ -14,7 +14,7 @@ update_and_upgrade() {
 
 install_packages() {
     local packages=(
-        x11-repo root-repo tur-repo termux-exec termux-api termux-x11
+        x11-repo root-repo tur-repo termux-exec termux-api
         curl wget git zip unzip openssh python python2 nodejs-lts perl php ruby golang rust
         shfmt clang libffi openssl fakeroot htop httping dnsutils jq libxml2-utils grep bc tsu
         nano zsh sqlite sshpass proot proot-distro android-tools figlet cowsay w3m ffmpeg pulseaudio fastfetch
