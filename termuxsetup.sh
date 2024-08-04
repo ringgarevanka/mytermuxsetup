@@ -4,7 +4,7 @@
 
 set -e # Exit immediately if a command exits with a non-zero status
 
-echo "Termux Setup By: rvnull00 (ringgarevanka) - V1Fix"
+echo "Termux Setup By: rvnull00 (ringgarevanka) - V1.1"
 
 update_and_upgrade() {
     echo "Updating and Upgrading Packages"
@@ -42,7 +42,7 @@ clear; termux-reload-settings; fastfetch -l none
 
     mkdir -p $HOME/.termux
     echo "# Termux Setup By: rvnull00 (ringgarevanka)
-extra-keys = [[{key: 'F1', popup: 'F7'},{key: 'F2', popup: 'F8'},{key: 'F3', popup: 'F9'},{key: 'F4', popup: 'F10'},{key: 'F5', popup: 'F11'},{key: 'F6', popup: 'F12'},'FN','SHIFT'],[{key: ESC, popup: {macro: 'CTRL d', display: 'EXIT'}},{key: '/', popup: '&&'},{key: '|', popup: '-'},'HOME','UP','END','PGUP',{key: 'BKSP', popup: 'DEL'}],['TAB',{key: 'CTRL', popup: 'PASTE'},'ALT','LEFT','DOWN','RIGHT','PGDN',{key: 'KEYBOARD', popup: 'DRAWER'}]]
+extra-keys = [[{key: 'F1', popup: 'F7'},{key: 'F2', popup: 'F8'},{key: 'F3', popup: 'F9'},{key: 'F4', popup: 'F10'},{key: 'F5', popup: 'F11'},{key: 'F6', popup: 'F12'},'FN','SHIFT'],[{key: ESC, popup: {macro: 'CTRL d', display: 'EXIT'}},{key: '/', popup: '&&'},{key: '-', popup: '|'},'HOME','UP','END','PGUP',{key: 'BKSP', popup: 'DEL'}],['TAB',{key: 'CTRL', popup: 'PASTE'},'ALT','LEFT','DOWN','RIGHT','PGDN',{key: 'KEYBOARD', popup: 'DRAWER'}]]
 " >$HOME/.termux/termux.properties
 }
 
