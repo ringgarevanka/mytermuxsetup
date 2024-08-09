@@ -1,10 +1,10 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-# Termux Setup By: rvnull00 (ringgarevanka) - V1.2
+# Termux Setup By: rvnull00 (ringgarevanka) - V1.2f
 
 set -euo pipefail # Additional options for strict error handling
 
-echo "Termux Setup By: rvnull00 (ringgarevanka) - V1.2"
+echo "Termux Setup By: rvnull00 (ringgarevanka) - V1.2f"
 
 update_and_upgrade() {
     echo "Updating and Upgrading Packages"
@@ -29,8 +29,7 @@ setup_php_composer() {
 
 setup_python_packages() {
     echo "Installing Python additional packages"
-    pkg install -y pip
-    pip install --upgrade setuptools requests 'requests[socks]' httpie ddgr
+    pip install --upgrade pip setuptools requests 'requests[socks]' httpie ddgr
 }
 
 setup_interface() {
