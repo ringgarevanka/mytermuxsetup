@@ -91,7 +91,7 @@ setup_php_composer() {
 # Function to install additional Python packages
 setup_python_packages() {
     local packages=(
-        setuptools httpie pandas beautifulsoup4 fabric numpy electrum opencv asciinema matplotlib cryptography
+        setuptools httpie beautifulsoup4 fabric numpy electrum opencv asciinema matplotlib cryptography
     )
 
     for package in "${packages[@]}"; do
