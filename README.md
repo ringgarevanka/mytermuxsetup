@@ -13,5 +13,3 @@ pkg install wget -y; wget -q https://raw.githubusercontent.com/ringgarevanka/myt
 ```
 
 *Note:* To update, run the command above again
-
-(If problems occur while installing packages use the mirror *termux-change-repo*)
