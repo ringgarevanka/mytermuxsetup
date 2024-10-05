@@ -46,8 +46,6 @@ setup_storage() {
 
 # Function to install a list of essential packages
 install_packages() {
-    display_message "Installing termux repository, termux packages, and essential packages..."
-
     local termux_repo=(
         x11-repo root-repo science-repo game-repo tur-repo
     )
@@ -57,12 +55,15 @@ install_packages() {
     )
 
     local packages=(
-        git curl wget nodejs-lts python-pip python openssl libffi clang perl php sqlite zsh nano shfmt dnsutils htop jq grep ffmpeg openssh pulseaudio fakeroot bc tsu fastfetch android-tools zip unzip proot-distro
+        git curl wget nodejs-lts python-pip python python-dev python-tkinter python-numpy electrum opencv-python asciinema matplotlib python-cryptography openssl libffi libffi-dev libcrypt libcrypt-dev clang perl php sqlite zsh nano shfmt dnsutils htop jq grep ffmpeg openssh pulseaudio fakeroot bc tsu fastfetch android-tools zip unzip proot-distro
     )
 
     # Loop and install
     for package in "${termux_repo[@]}" "${termux_packages[@]}" "${packages[@]}"; do
+        display_message "Installing or update termux repository, termux packages, and essential packages..."
+        echo_green "Installing or Upgrade '$package'..."
         pkg install -y "$package"
+        echo_green "Success Installing or Upgrade $package"
     done
 }
 
@@ -89,14 +90,15 @@ setup_php_composer() {
 
 # Function to install additional Python packages
 setup_python_packages() {
-    display_message "Installing additional Python packages..."
-
     local packages=(
-        requests setuptools httpie NumPy pandas Flask Django SQLAlchemy scikit-learn Jupyter matplotlib seaborn plotly beautifulsoup4 FastAPI selenium scrapy Pillow pygame docker fabric
+        setuptools httpie pandas beautifulsoup4 fabric numpy electrum opencv asciinema matplotlib cryptography
     )
 
     for package in "${packages[@]}"; do
+        display_message "Installing additional Python packages..."
+        echo_green "Installing or Upgrade '$package'..."
         pip install --quiet --upgrade "$package"
+        echo_green "Success Installing or Upgrade $package"
     done
 }
 
