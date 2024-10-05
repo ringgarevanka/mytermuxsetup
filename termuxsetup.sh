@@ -53,7 +53,7 @@ install_packages() {
     )
 
     local termux_packages=(
-        termux-am termux-am-socket termux-api termux-api-static termux-apt-repo termux-auth termux-create-package termux-elf-cleaner termux-exec termux-gui-bash termux-gui-c termux-gui-package termux-gui-pm termux-keyring termux-licenses termux-services termux-tools
+        termux-am termux-am-socket termux-api termux-api-static termux-auth termux-create-package termux-elf-cleaner termux-exec termux-gui-bash termux-gui-c termux-gui-package termux-gui-pm termux-keyring termux-licenses termux-services termux-tools
     )
 
     local packages=(
