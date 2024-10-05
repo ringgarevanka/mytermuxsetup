@@ -1,15 +1,17 @@
-# _mytermuxsetup_
+# My Termux Setup
 
-*Run on Termux:*
+Termux simple configuration and scripts I've set up.
+
+*Install (Run on Termux):*
+*Release (Main):*
+``` bash
+pkg install wget -y; wget -q https://raw.githubusercontent.com/ringgarevanka/mytermuxsetup/refs/heads/main/termuxsetup.sh; bash termuxsetup.sh
 ```
-pkg install git -y
-git clone https://github.com/ringgarevanka/mytermuxsetup.git
-bash mytermuxsetup/termuxsetup.sh
+*Beta (Unstable):*
+``` bash
+pkg install wget -y; wget -q https://raw.githubusercontent.com/ringgarevanka/mytermuxsetup/refs/heads/beta/termuxsetup.sh; bash termuxsetup.sh
 ```
-OR
-```
-pkg install git -y && git clone https://github.com/ringgarevanka/mytermuxsetup.git && bash mytermuxsetup/termuxsetup.sh
-```
-Note: To update, run the command above again
+
+*Note:* To update, run the command above again
 
 (If problems occur while installing packages use the mirror *termux-change-repo*)
