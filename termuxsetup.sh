@@ -55,7 +55,7 @@ install_packages() {
     )
 
     local packages=(
-        git curl wget nodejs-lts python-pip python python-dev python-tkinter python-numpy electrum opencv-python asciinema matplotlib python-cryptography openssl libffi libffi-dev libcrypt libcrypt-dev clang perl php sqlite zsh nano shfmt dnsutils htop jq grep ffmpeg openssh pulseaudio fakeroot bc tsu fastfetch android-tools zip unzip proot-distro
+        git curl wget nodejs-lts python-pip python python-tkinter python-numpy electrum opencv-python asciinema matplotlib python-cryptography openssl libffi libcrypt clang perl php sqlite zsh nano shfmt dnsutils htop jq grep ffmpeg openssh pulseaudio fakeroot bc tsu fastfetch android-tools zip unzip proot-distro
     )
 
     # Loop and install
