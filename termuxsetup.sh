@@ -18,8 +18,8 @@ initialize_environment() {
     # trap '' SIGTSTP
 
     # Trap for errors, signals, and network issues:
-    # The script will automatically delete itself if an error occurs or if it receives SIGINT, SIGTERM, or SIGHUP signals
-    trap 'rm -rf "$0"; exit 1' ERR SIGINT SIGTERM SIGHUP SIGTSTP
+    # The script will automatically delete itself if an error occurs or if it receives SIGINT, SIGTERM, SIGHUP, or SIGTSTP signals
+    trap 'rm -rf "$0"; trap - ERR SIGINT SIGTERM SIGHUP SIGTSTP; exit 1' ERR SIGINT SIGTERM SIGHUP SIGTSTP
 
     # Function to check network availability:
     # If the network is unavailable (cannot ping 8.8.8.8),
