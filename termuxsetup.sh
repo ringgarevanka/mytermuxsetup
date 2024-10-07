@@ -137,7 +137,7 @@ install_additional_python_packages() {
 
     for package in "${packages[@]}"; do
         show_message "Installing additional Python package '$package'..."
-        pip install --quiet --upgrade "$package"
+        pip install --upgrade "$package"
         display_in_green "Successfully installed or updated $package"
         sleep 1
     done
@@ -202,11 +202,8 @@ perform_termux_cleanup() {
 
 # Function to clear traps and exit safely
 exit_cleanly() {
-    # Remove trap to ENABLE CTRL+Z
-    trap - SIGTSTP
-
-    # Remove traps for errors, signals, and network problems
-    trap - ERR SIGINT SIGTERM SIGHUP
+    # Remove traps to ENABLE CTRL+Z and for errors, signals, and network problems
+    trap - ERR SIGINT SIGTERM SIGHUP SIGTSTP
 
     # Remove this script
     rm -rf "$0"
