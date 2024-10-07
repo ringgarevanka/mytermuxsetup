@@ -89,18 +89,21 @@ install_essential_packages() {
         show_message "Adding Termux repository '$package'..."
         pkg install -y "$package"
         display_in_green "Successfully added $package"
+        sleep 1
     done
 
     for package in "${termux_packages[@]}"; do
         show_message "Installing Termux package '$package'..."
         pkg install -y "$package"
         display_in_green "Successfully installed $package"
+        sleep 1
     done
 
     for package in "${additional_packages[@]}"; do
         show_message "Installing additional package '$package'..."
         pkg install -y "$package"
         display_in_green "Successfully installed $package"
+        sleep 1
     done
 }
 
@@ -136,6 +139,7 @@ install_additional_python_packages() {
         show_message "Installing additional Python package '$package'..."
         pip install --quiet --upgrade "$package"
         display_in_green "Successfully installed or updated $package"
+        sleep 1
     done
 }
 
