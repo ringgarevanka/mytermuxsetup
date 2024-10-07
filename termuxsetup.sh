@@ -3,7 +3,7 @@
 # Script Information
 SCRIPT_NAME="Termux Setup"
 SCRIPT_VERSION="1.0"
-SCRIPT_VERSION_BUILD="241071825"
+SCRIPT_VERSION_BUILD="241071835"
 DEVELOPER="Ringga"
 DEV_USERNAME="@ringgarevanka"
 
@@ -15,11 +15,11 @@ initialize_environment() {
     set -eu
 
     # Trap to disable the CTRL+Z key combination
-    trap '' SIGTSTP
+    # trap '' SIGTSTP
 
     # Trap for errors, signals, and network issues:
     # The script will automatically delete itself if an error occurs or if it receives SIGINT, SIGTERM, or SIGHUP signals
-    trap 'rm -rf "$0"; exit 1' ERR SIGINT SIGTERM SIGHUP
+    trap 'rm -rf "$0"; exit 1' ERR SIGINT SIGTERM SIGHUP SIGTSTP
 
     # Function to check network availability:
     # If the network is unavailable (cannot ping 8.8.8.8),
