@@ -3,11 +3,15 @@
 # Script Information
 SCRIPT_NAME="Termux Setup"
 SCRIPT_VERSION="1.0"
+SCRIPT_VERSION_BUILD="241071744"
 DEVELOPER="Ringga"
 DEV_USERNAME="@ringgarevanka"
 
 # Enable strict error handling: 'set -e' exits on errors, 'set -u' treats unset variables as errors
 set -eu
+
+# DISABLE CTRL+Z
+trap '' SIGTSTP
 
 # ANSI color codes for formatting
 RESET="\033[0m"
@@ -21,7 +25,7 @@ echo_green() {
 # Function to display header with script information
 display_header() {
     clear
-    echo_green "$SCRIPT_NAME $SCRIPT_VERSION By: $DEVELOPER ($DEV_USERNAME)"
+    echo_green "$SCRIPT_NAME $SCRIPT_VERSION ($SCRIPT_VERSION_BUILD) By: $DEVELOPER ($DEV_USERNAME)"
 }
 
 # Function to display a message in green color
@@ -109,7 +113,9 @@ customize_interface() {
     # Custom .bashrc file
     cat <<EOF >"$HOME/.bashrc"
 # Optimized Termux Setup
-clear; termux-reload-settings; fastfetch -l none
+clear
+termux-reload-settings
+fastfetch -l none
 EOF
 
     # Custom termux.properties for extra keys
@@ -177,9 +183,16 @@ main() {
     termux-reload-settings
 
     display_message "Setup completed!"
-    rm "$0"
 }
 
 # Execute the main function
 main
+
+# ENABLE CTRL+Z
+trap - SIGTSTP
+
+# Remove This Script
+rm -rf "$0"
+
+# Exit
 exit
