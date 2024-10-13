@@ -155,7 +155,7 @@ install_additional_python_packages() {
 # Function to customize the Termux interface
 customize_termux_interface() {
     local additional_packages=(
-        figlet neofetch util-linux cal curl
+        figlet neofetch util-linux curl
     )
 
     # Loop and install each package
