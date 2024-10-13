@@ -90,7 +90,7 @@ install_essential_packages() {
     )
 
     local additional_packages=(
-        git curl wget nodejs-lts python-pip python python-tkinter python-numpy electrum opencv-python asciinema matplotlib python-cryptography openssl libffi libcrypt clang perl php sqlite zsh nano shfmt dnsutils htop jq grep ffmpeg openssh pulseaudio fakeroot bc tsu android-tools zip unzip proot-distro
+        git curl wget apt nodejs-lts python-pip python python-tkinter python-numpy electrum opencv-python asciinema matplotlib python-cryptography openssl libffi libcrypt clang perl php sqlite zsh nano shfmt dnsutils htop jq grep ffmpeg openssh pulseaudio fakeroot bc tsu android-tools zip unzip proot-distro
     )
 
     # Loop and install each package
@@ -155,7 +155,7 @@ install_additional_python_packages() {
 # Function to customize the Termux interface
 customize_termux_interface() {
     local additional_packages=(
-        apt install figlet neofetch util-linux cal curl
+        figlet neofetch util-linux cal curl
     )
 
     # Loop and install each package
