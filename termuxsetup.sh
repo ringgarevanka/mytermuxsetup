@@ -155,7 +155,7 @@ install_additional_python_packages() {
 # Function to customize the Termux interface
 customize_termux_interface() {
     local additional_packages=(
-        figlet neofetch util-linux curl
+        neofetch
     )
 
     # Loop and install each package
@@ -172,76 +172,8 @@ customize_termux_interface() {
     # Create a custom .bashrc file for user settings
     cat <<EOF >"$HOME/.bashrc"
 # Termux Setup
-# Define colors
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-MAGENTA='\033[0;35m'
-CYAN='\033[0;36m'
-RESET='\033[0m'  # Reset color
-
-# Function to print with color
-print_colored() {
-    echo -e "$1$2$RESET"
-}
-
-# Welcome message with figlet in color (ensure figlet is installed)
-if command -v figlet > /dev/null; then
-    print_colored "$GREEN" "$(figlet "Welcome, $USER!")"
-else
-    print_colored "$GREEN" "Welcome, $USER!"
-fi
-
-# Get system information using neofetch (without ASCII logo)
-if command -v neofetch > /dev/null; then
-    print_colored "$CYAN" "$(neofetch --backend off --bold)"
-else
-    print_colored "$YELLOW" "neofetch is not installed. Please install it for better system info."
-fi
-
-# Display the current date and time
-print_colored "$MAGENTA" "============================================"
-print_colored "$YELLOW" "Today's Date: $(date +"%A, %d %B %Y")"
-print_colored "$YELLOW" "Current Time: $(date +"%T")"
-print_colored "$MAGENTA" "============================================"
-
-# Show the calendar for the current month
-print_colored "$BLUE" "Here is the current month's calendar:"
-cal
-echo
-
-# Display a random quote or tip of the day
-tips=(
-    "Backup your work regularly!"
-    "Use 'grep' to search through files."
-    "Check disk usage with 'df -h'."
-    "Use 'tmux' to keep sessions alive."
-    "Optimize your scripts for performance."
-)
-
-# Only attempt to pick a random tip if the array has elements
-if [ ${#tips[@]} -gt 0 ]; then
-    random_tip=${tips[RANDOM % ${#tips[@]}]}
-    print_colored "$CYAN" "Tip of the day: $random_tip"
-else
-    print_colored "$YELLOW" "No tips available."
-fi
-echo
-
-# Get weather information (replace with your location)
-if command -v curl > /dev/null; then
-    print_colored "$BLUE" "Fetching weather for your location..."
-    weather=$(curl -s "wttr.in/?format=3")
-    print_colored "$CYAN" "$weather"
-else
-    print_colored "$YELLOW" "curl is not installed. Please install it to fetch weather info."
-fi
-echo
-
-# Final message
-print_colored "$GREEN" "Enjoy your session!"
-print_colored "$MAGENTA" "============================================"
+clear
+neofetch --backend off --bold
 EOF
 
     # Create a custom termux.properties file for extra keys
