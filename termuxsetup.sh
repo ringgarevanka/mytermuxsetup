@@ -2,7 +2,7 @@
 
 # Script Information
 SCRIPT_NAME="Termux Setup"
-SCRIPT_VERSION="1.0f"
+SCRIPT_VERSION="1.0-1"
 DEVELOPER="Ringga"
 DEV_USERNAME="@ringgarevanka"
 
@@ -219,8 +219,14 @@ tips=(
     "Use 'tmux' to keep sessions alive."
     "Optimize your scripts for performance."
 )
-random_tip=${tips[RANDOM % ${#tips[@]}]}
-print_colored "$CYAN" "Tip of the day: $random_tip"
+
+# Only attempt to pick a random tip if the array has elements
+if [ ${#tips[@]} -gt 0 ]; then
+    random_tip=${tips[RANDOM % ${#tips[@]}]}
+    print_colored "$CYAN" "Tip of the day: $random_tip"
+else
+    print_colored "$YELLOW" "No tips available."
+fi
 echo
 
 # Get weather information (replace with your location)
