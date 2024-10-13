@@ -49,13 +49,14 @@ initialize_environment() {
 
     # Trap for errors, signals, and network issues:
     # The script will exit if an error occurs or if it receives SIGINT, SIGTERM, SIGHUP, or SIGTSTP signals
+    # This is Test Code (Possibly not working)
     trap 'display_in_red "Signal caught, exiting..."; nohup rm -rf $0 &; exit 1' SIGINT SIGTERM SIGHUP
 
     # Function to check network availability:
     # If the network is unavailable (cannot ping 8.8.8.8),
     # this script will exit with status 1
     check_network() {
-        if ! ping -c 1 8.8.8.8 &> /dev/null; then
+        if ! ping -c 1 8.8.8.8 &>/dev/null; then
             display_in_red "Network unavailable, exiting..."
             nohup rm -rf $0 &
             exit 1
@@ -89,7 +90,7 @@ install_essential_packages() {
     )
 
     local additional_packages=(
-        git curl wget nodejs-lts python-pip python python-tkinter python-numpy electrum opencv-python asciinema matplotlib python-cryptography openssl libffi libcrypt clang perl php sqlite zsh nano shfmt dnsutils htop jq grep ffmpeg openssh pulseaudio fakeroot bc tsu fastfetch android-tools zip unzip proot-distro
+        git curl wget nodejs-lts python-pip python python-tkinter python-numpy electrum opencv-python asciinema matplotlib python-cryptography openssl libffi libcrypt clang perl php sqlite zsh nano shfmt dnsutils htop jq grep ffmpeg openssh pulseaudio fakeroot bc tsu android-tools zip unzip proot-distro
     )
 
     # Loop and install each package
@@ -153,17 +154,88 @@ install_additional_python_packages() {
 
 # Function to customize the Termux interface
 customize_termux_interface() {
-    show_message "Customizing Termux Interface..."
+    local additional_packages=(
+        apt install figlet neofetch util-linux cal curl
+    )
 
+    # Loop and install each package
+    for package in "${additional_packages[@]}"; do
+        show_message "Customizing Termux Interface..."
+        display_in_green "Installing Additional Package '$package'..."
+        pkg install -y "$package"
+        display_in_green "Successfully installed $package"
+        sleep 1
+    done
+
+    show_message "Customizing Termux Interface..."
+    display_in_green "Installing Configuration to .bashrc and .termux/termux.properties..."
     # Create a custom .bashrc file for user settings
     cat <<EOF >"$HOME/.bashrc"
 # Termux Setup
-clear
-echo "Loading, Please Wait..."
-termux-reload-settings
-sleep 0.5
-clear
-fastfetch -l none
+# Define colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
+CYAN='\033[0;36m'
+RESET='\033[0m'  # Reset color
+
+# Function to print with color
+print_colored() {
+    echo -e "$1$2$RESET"
+}
+
+# Welcome message with figlet in color (ensure figlet is installed)
+if command -v figlet > /dev/null; then
+    print_colored "$GREEN" "$(figlet "Welcome, $USER!")"
+else
+    print_colored "$GREEN" "Welcome, $USER!"
+fi
+
+# Get system information using neofetch (without ASCII logo)
+if command -v neofetch > /dev/null; then
+    print_colored "$CYAN" "$(neofetch --backend off --bold)"
+else
+    print_colored "$YELLOW" "neofetch is not installed. Please install it for better system info."
+fi
+
+# Display the current date and time
+print_colored "$MAGENTA" "============================================"
+print_colored "$YELLOW" "Today's Date: $(date +"%A, %d %B %Y")"
+print_colored "$YELLOW" "Current Time: $(date +"%T")"
+print_colored "$MAGENTA" "============================================"
+
+# Show the calendar for the current month
+print_colored "$BLUE" "Here is the current month's calendar:"
+cal
+echo
+
+# Display a random quote or tip of the day
+tips=(
+    "Backup your work regularly!"
+    "Use 'grep' to search through files."
+    "Check disk usage with 'df -h'."
+    "Use 'tmux' to keep sessions alive."
+    "Optimize your scripts for performance."
+)
+random_tip=${tips[RANDOM % ${#tips[@]}]}
+print_colored "$CYAN" "Tip of the day: $random_tip"
+echo
+
+# Get weather information (replace with your location)
+if command -v curl > /dev/null; then
+    print_colored "$BLUE" "Fetching weather for your location..."
+    weather=$(curl -s "wttr.in/?format=3")
+    print_colored "$CYAN" "$weather"
+else
+    print_colored "$YELLOW" "curl is not installed. Please install it to fetch weather info."
+fi
+echo
+
+# Final message
+print_colored "$GREEN" "Enjoy your session!"
+print_colored "$MAGENTA" "============================================"
 EOF
 
     # Create a custom termux.properties file for extra keys
