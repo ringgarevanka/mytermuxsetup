@@ -2,52 +2,31 @@
 
 # Script Information
 SCRIPT_NAME="Termux Setup"
-SCRIPT_VERSION="1.0"
-SCRIPT_VERSION_BUILD="241071835"
+SCRIPT_VERSION="1.0f"
 DEVELOPER="Ringga"
 DEV_USERNAME="@ringgarevanka"
 
-# This script initializes a safe execution environment.
-initialize_environment() {
-    # Enable strict error handling:
-    # 'set -e' will exit the script if any command fails
-    # 'set -u' will treat unset variables as errors
-    set -eu
-
-    # Trap to disable the CTRL+Z key combination
-    # trap '' SIGTSTP
-
-    # Trap for errors, signals, and network issues:
-    # The script will automatically delete itself if an error occurs or if it receives SIGINT, SIGTERM, SIGHUP, or SIGTSTP signals
-    trap 'rm -rf "$0"; trap - ERR SIGINT SIGTERM SIGHUP SIGTSTP; exit 1' ERR SIGINT SIGTERM SIGHUP SIGTSTP
-
-    # Function to check network availability:
-    # If the network is unavailable (cannot ping 8.8.8.8),
-    # this script will delete itself and exit with status 1
-    check_network() {
-        if ! ping -c 1 8.8.8.8 &> /dev/null; then
-            rm -rf "$0"
-            exit 1
-        fi
-    }
-
-    # Call the function to check network connectivity
-    check_network
-}
-
+# --- ANSI
 # ANSI color codes for formatting
 RESET="\033[0m"
+
+# Red Text
+display_in_red() {
+    local COLOR="\033[1;31m"
+    echo -e "${COLOR}$1${RESET}"
+}
 
 # Green Text
 display_in_green() {
     local COLOR="\033[1;32m"
     echo -e "${COLOR}$1${RESET}"
 }
+# ---
 
 # Function to display header with script information
 show_header() {
     clear
-    display_in_green "$SCRIPT_NAME $SCRIPT_VERSION ($SCRIPT_VERSION_BUILD) By: $DEVELOPER ($DEV_USERNAME)"
+    display_in_green "$SCRIPT_NAME $SCRIPT_VERSION By: $DEVELOPER ($DEV_USERNAME)"
 }
 
 # Function to display a message in green color
@@ -56,6 +35,34 @@ show_message() {
     show_header
     display_in_green "$message"
     display_in_green ""
+}
+
+# This script initializes a safe execution environment.
+initialize_environment() {
+    # Enable strict error handling:
+    # 'set -e' will exit the script if any command fails
+    # 'set -u' will treat unset variables as errors
+    set -eu
+
+    # Captures ERR signals and displays error messages with command details.
+    trap 'display_in_red "Error occurred on line $LINENO while executing command: $BASH_COMMAND"; exit 1; nohup rm -rf $0 &' ERR
+
+    # Trap for errors, signals, and network issues:
+    # The script will exit if an error occurs or if it receives SIGINT, SIGTERM, SIGHUP, or SIGTSTP signals
+    trap 'display_in_red "Signal caught, exiting..."; exit 1; nohup rm -rf $0 &' SIGINT SIGTERM SIGHUP
+
+    # Function to check network availability:
+    # If the network is unavailable (cannot ping 8.8.8.8),
+    # this script will exit with status 1
+    check_network() {
+        if ! ping -c 1 8.8.8.8 &> /dev/null; then
+            display_in_red "Network unavailable, exiting..."
+            exit 1; nohup rm -rf $0 &
+        fi
+    }
+
+    # Call the function to check network connectivity
+    check_network
 }
 
 # Function to update and upgrade packages
@@ -202,8 +209,8 @@ perform_termux_cleanup() {
 
 # Function to clear traps and exit safely
 exit_cleanly() {
-    # Remove traps to ENABLE CTRL+Z and for errors, signals, and network problems
-    trap - ERR SIGINT SIGTERM SIGHUP SIGTSTP
+    # Remove traps for errors, signals, and network problems
+    trap - ERR SIGINT SIGTERM SIGHUP
 
     # Remove this script
     rm -rf "$0"
