@@ -45,11 +45,11 @@ initialize_environment() {
     set -eu
 
     # Captures ERR signals and displays error messages with command details.
-    trap 'display_in_red "Error occurred on line $LINENO while executing command: $BASH_COMMAND"; exit 1; nohup rm -rf $0 &' ERR
+    trap 'display_in_red "Error occurred on line $LINENO while executing command: $BASH_COMMAND"; nohup rm -rf $0 &; exit 1' ERR
 
     # Trap for errors, signals, and network issues:
     # The script will exit if an error occurs or if it receives SIGINT, SIGTERM, SIGHUP, or SIGTSTP signals
-    trap 'display_in_red "Signal caught, exiting..."; exit 1; nohup rm -rf $0 &' SIGINT SIGTERM SIGHUP
+    trap 'display_in_red "Signal caught, exiting..."; nohup rm -rf $0 &; exit 1' SIGINT SIGTERM SIGHUP
 
     # Function to check network availability:
     # If the network is unavailable (cannot ping 8.8.8.8),
@@ -57,7 +57,8 @@ initialize_environment() {
     check_network() {
         if ! ping -c 1 8.8.8.8 &> /dev/null; then
             display_in_red "Network unavailable, exiting..."
-            exit 1; nohup rm -rf $0 &
+            nohup rm -rf $0 &
+            exit 1
         fi
     }
 
@@ -156,16 +157,19 @@ customize_termux_interface() {
 
     # Create a custom .bashrc file for user settings
     cat <<EOF >"$HOME/.bashrc"
-# Optimized Termux Setup
+# Termux Setup
 clear
+echo "Loading, Please Wait..."
 termux-reload-settings
+sleep 0.5
+clear
 fastfetch -l none
 EOF
 
     # Create a custom termux.properties file for extra keys
     mkdir -p "$HOME/.termux"
     cat <<EOF >"$HOME/.termux/termux.properties"
-# Optimized extra-keys layout
+# extra-keys layout
 extra-keys = [[{key: 'ESC', popup: {macro: 'CTRL d', display: 'EXIT'}},{key: '/', popup: '&&'},{key: '-', popup: '|'},'HOME','UP','END','PGUP',{key: 'BKSP', popup: 'DEL'}],['TAB',{key: 'CTRL', popup: 'PASTE'},'ALT','LEFT','DOWN','RIGHT','PGDN',{key: 'KEYBOARD', popup: 'DRAWER'}]]
 EOF
 }
