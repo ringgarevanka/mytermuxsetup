@@ -90,28 +90,28 @@ install_essential_packages() {
     )
 
     local additional_packages=(
-        git curl wget apt nodejs-lts python-pip python python-tkinter python-numpy electrum opencv-python asciinema matplotlib python-cryptography openssl libffi libcrypt clang perl php sqlite zsh nano shfmt dnsutils htop jq grep ffmpeg openssh pulseaudio fakeroot bc tsu android-tools zip unzip proot-distro
+        git curl wget apt nodejs-lts python-pip python python-tkinter python-numpy openjdk-21 openjdk-21-x electrum opencv-python asciinema matplotlib python-cryptography openssl libffi libcrypt clang perl php sqlite zsh nano shfmt dnsutils htop jq grep ffmpeg openssh pulseaudio fakeroot bc tsu android-tools zip unzip proot-distro
     )
 
     # Loop and install each package
     for package in "${termux_repositories[@]}"; do
         show_message "Adding Termux repository '$package'..."
         pkg install -y "$package"
-        display_in_green "Successfully added $package"
+        display_in_green "Successfully added '$package'"
         sleep 1
     done
 
     for package in "${termux_packages[@]}"; do
-        show_message "Installing Termux package '$package'..."
+        show_message "Installing or update Termux package '$package'..."
         pkg install -y "$package"
-        display_in_green "Successfully installed $package"
+        display_in_green "Successfully installed or updated '$package'"
         sleep 1
     done
 
     for package in "${additional_packages[@]}"; do
-        show_message "Installing additional package '$package'..."
+        show_message "Installing or update additional package '$package'..."
         pkg install -y "$package"
-        display_in_green "Successfully installed $package"
+        display_in_green "Successfully installed or updated '$package'"
         sleep 1
     done
 }
@@ -145,7 +145,7 @@ install_additional_python_packages() {
     )
 
     for package in "${packages[@]}"; do
-        show_message "Installing additional Python package '$package'..."
+        show_message "Installing or update additional Python package '$package'..."
         pip install --upgrade "$package"
         display_in_green "Successfully installed or updated $package"
         sleep 1
@@ -161,9 +161,9 @@ customize_termux_interface() {
     # Loop and install each package
     for package in "${additional_packages[@]}"; do
         show_message "Customizing Termux Interface..."
-        display_in_green "Installing Additional Package '$package'..."
+        display_in_green "Installing or update Additional Package '$package'..."
         pkg install -y "$package"
-        display_in_green "Successfully installed $package"
+        display_in_green "Successfully installed or updated $package"
         sleep 1
     done
 
@@ -191,11 +191,11 @@ perform_termux_cleanup() {
 
     # Clean up package and APT cache, and remove unused packages
     display_in_green "Cleaning package and APT cache, and removing unused packages..."
+    pkg autoclean
+    pkg clean
     apt autoremove -y --purge
     apt autoclean
     apt clean
-    pkg autoclean
-    pkg clean
     display_in_green "Package and APT cleanup completed.\n"
 
     # Remove .bak and .tmp files
